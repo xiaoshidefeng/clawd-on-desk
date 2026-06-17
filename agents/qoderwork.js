@@ -33,9 +33,10 @@ module.exports = {
     PostToolUseFailure: "error",
     Stop: "attention",
     Notification: "notification",
-    // Phase 1 state-only: observed as a passive notification, no decision.
-    PermissionRequest: "notification",
-    PermissionDenied: "notification",
+    // Phase 1 state-only: mapped to "working" (not "notification") to avoid
+    // animation spam — these fire 40+ times per task as part of normal tool use.
+    PermissionRequest: "working",
+    PermissionDenied: "working",
     SessionEnd: "sleeping",
   },
   capabilities: {

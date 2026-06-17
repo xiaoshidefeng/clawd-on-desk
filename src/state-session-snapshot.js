@@ -144,7 +144,12 @@ function sessionDisplayTitle(id, sessionLike, sessionAliases = {}, options = {})
   const title = getEffectiveSessionTitle(id, sessionLike, options);
   if (title) return title;
   const cwd = sessionLike && sessionLike.cwd;
-  if (cwd) return path.basename(cwd);
+  // Skip cwd fallback for QoderWork internal workspace paths
+  // (e.g. ~/.qoderwork/workspace/<id>) — displaying the workspace ID
+  // like "mqgw60jiigjsjcid" is meaningless to the user.
+  if (cwd && typeof cwd === "string" && !/[/\\]\.qoderwork[/\\]workspace[/\\][^/\\]+$/.test(cwd.replace(/\\/g, "/"))) {
+    return path.basename(cwd);
+  }
   return id && id.length > 6 ? `${id.slice(0, 6)}..` : id;
 }
 

@@ -163,9 +163,9 @@ const defaultResolve = createPidResolver({
   agentNames: {
     // Only match QoderWork IDE process — `qodercli` is shared with Qoder IDE
     // and would cause cross-agent mis-attribution.
-    win: new Set(["QoderWork.exe"]),
-    mac: new Set(["QoderWork"]),
-    linux: new Set(["QoderWork"]),
+    win: new Set(["qoderwork.exe"]),
+    mac: new Set(["qoderwork"]),
+    linux: new Set(["qoderwork"]),
   },
   agentCmdlineCheck: isQoderWorkAgentCommandLine,
   platformConfig: config,

@@ -377,8 +377,10 @@ describe("Agent Registry", () => {
     assert.strictEqual(qoderwork.eventMap.PreToolUse, "working");
     assert.strictEqual(qoderwork.eventMap.PostToolUseFailure, "error");
     assert.strictEqual(qoderwork.eventMap.Stop, "attention");
-    assert.strictEqual(qoderwork.eventMap.PermissionRequest, "notification");
-    assert.strictEqual(qoderwork.eventMap.PermissionDenied, "notification");
+    // Permission events map to "working" (not "notification") to avoid
+    // animation spam — QoderWork fires 40+ per task during normal tool use.
+    assert.strictEqual(qoderwork.eventMap.PermissionRequest, "working");
+    assert.strictEqual(qoderwork.eventMap.PermissionDenied, "working");
     assert.strictEqual(qoderwork.eventMap.SessionEnd, "sleeping");
   });
 
